@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>员工评比页面</title>
+    <title>机床二厂员工评比页面</title>
     <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <style type="text/css">
         body{width: auto ;margin: 0px auto;text-align: center}
@@ -33,11 +33,40 @@
   </div>
 <div class="evaluate">
 
-    <textarea class="edit" >
-
-    </textarea>
+   <textarea class="edit" cols="50" rows="5" id="textarea" onKeyDown="textdown(event)"
+             onKeyUp="textup()" onfocus="if(value=='限100字'){value=''}"
+             onblur="if (value ==''){value='限100字'}">限100字</textarea>
 </div>
 
 <button onclick="doSubmit()"> 提交评价</button>
+
+
+<script>
+    function doSubmit(){
+        alert("提交成功");
+    }
+
+    function textdown(e) {
+        textevent = e;
+        if (textevent.keyCode == 8) {
+            return;
+        }
+        if (document.getElementById('textarea').value.length >= 100) {
+            alert("大侠，手下留情，此处限字100")
+            if (!document.all) {
+                textevent.preventDefault();
+            } else {
+                textevent.returnValue = false;
+            }
+        }
+    }
+    function textup() {
+        var s = document.getElementById('textarea').value;
+        //判断ID为text的文本区域字数是否超过100个
+        if (s.length > 100) {
+            document.getElementById('textarea').value = s.substring(0, 100);
+        }
+    }
+</script>
 </body>
 </html>
